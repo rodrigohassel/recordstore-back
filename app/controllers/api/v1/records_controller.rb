@@ -1,7 +1,7 @@
 module Api
   module V1
     class RecordsController < ApplicationController
-      before_action :set_record, only: [:show, :update, :destroy]
+      before_action :set_record, only: %i[show update destroy]
 
       # GET /records
       def index
@@ -41,15 +41,16 @@ module Api
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_record
-          @record = Record.find(params[:id])
-        end
 
-        # Only allow a trusted parameter "white list" through.
-        def record_params
-          params.require(:record).permit(:title, :year, :artist_id, :user_id)
-        end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_record
+        @record = Record.find(params[:id])
+      end
+
+      # Only allow a trusted parameter "white list" through.
+      def record_params
+        params.require(:record).permit(:title, :year, :artist_id, :user_id)
+      end
     end
   end
 end
